@@ -1,0 +1,49 @@
+#!/sbin/runscript
+
+
+depend() {
+    need net
+    before vdr
+}
+
+
+start()
+{
+   ebegin "Starting $DESC"
+   WATCHDOG=`pidof -x oscam_watchdog.sh`
+   [ -z $WATCHDOG ] && killall -q oscam_watchdog.sh
+   [ -f /var/run/oscam.pid ] && rm -f /var/run/oscam.pid
+   export MALLOC_CHECK_=0
+   start-stop-daemon --start --exec $DAEMON -- $CONFIG
+   ebegin "Starting Watchdog for $DESC"
+   /usr/bin/oscam_watchdog.sh &
+   eend 0
+}
+
+
+
+stop()
+{
+   ebegin "Stopping $DESC"
+   start-stop-daemon --stop --exec $DAEMON
+   [ -f /var/run/oscam.pid ] && rm -f /var/run/oscam.pid
+   ebegin "Stopping Watchdog for $DESC"
+   killall -q oscam_watchdog.sh
+   sleep 1
+   if [ -n "$(pidof oscam)" ] ; then
+     ewarn "Waiting for $DESC termination ..."
+     for in in $(seq 1 10) ; do
+       if [ -z $(pidof oscam) ] ; then
+         break;
+       fi
+       sleep 1
+     done
+     if [ -n "$(pidof oscam)" ]; then
+       eerror  "$DESC does not terminate normally - killing $DESC"
+       killall -v -KILL oscam
+       sleep 1
+       [ -f /var/run/oscam.pid ] && rm -f /var/run/oscam.pid
+     fi
+   fi
+   eend 0
+}
