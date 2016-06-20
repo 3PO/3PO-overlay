@@ -1,0 +1,62 @@
+#!/sbin/runscript
+
+
+description="This daemon is used to retrieve new EPG data into a mysql database, downloading the information from the Internet"
+
+depend() {
+    need mysql
+}
+
+
+start()
+{
+   ebegin "Starting $DESC"
+   [ $UTF8 -eq 1 ] && export LANG="de_DE.UTF-8"
+   start-stop-daemon --start --exec $DAEMON -- $CONFIG
+   ebegin "Starting $DESC2"
+   [ $UTF8 -eq 1 ] && export LANG="de_DE.UTF-8"
+   start-stop-daemon --start --exec $DAEMON2 -- $CONFIG2
+
+   eend 0
+}
+
+
+
+stop()
+{
+   ebegin "Stopping $DESC"
+   start-stop-daemon --stop --exec $DAEMON
+   ebegin "Stopping $DESC2"
+   start-stop-daemon --stop --exec $DAEMON2
+   sleep 1
+   if [ -n "$(pidof epgd)" ] ; then
+     ewarn "Waiting for $DESC termination ..."
+     for in in $(seq 1 10) ; do
+       if [ -z $(pidof epgd) ] ; then
+         break;
+       fi
+       sleep 1
+     done
+     if [ -n "$(pidof epgd)" ]; then
+       eerror  "$DESC does not terminate normally - killing $DESC"
+       killall -v -KILL epgd
+       sleep 1
+     fi
+   fi
+   if [ -n "$(pidof epghttpd)" ] ; then
+     ewarn "Waiting for $DESC2 termination ..."
+     for in in $(seq 1 10) ; do
+       if [ -z $(pidof epghttpd) ] ; then
+         break;
+       fi
+       sleep 1
+     done
+     if [ -n "$(pidof epghttpd)" ]; then
+       eerror  "$DESC2 does not terminate normally - killing $DESC2"
+       killall -v -KILL epghttpd
+       sleep 1
+     fi
+   fi
+
+   eend 0
+}

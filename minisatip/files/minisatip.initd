@@ -1,0 +1,41 @@
+#!/sbin/runscript
+
+
+depend() {
+    need net
+}
+
+DAEMON="/usr/bin/minisatip" 
+DESC="miniSAT>IP Server"
+
+
+start()
+{
+   ebegin "Starting $DESC"
+   start-stop-daemon --start --exec $DAEMON -- $MINISATIP_OPTS
+   eend 0
+}
+
+
+stop()
+{
+   ebegin "Stopping $DESC"
+   start-stop-daemon --stop --exec $DAEMON 
+   sleep 1
+   if [ -n "$(pidof minisatip)" ] ; then
+     ewarn "Waiting for $DESC termination ..."
+     for in in $(seq 1 10) ; do
+       if [ -z $(pidof minisatip) ] ; then
+         break;
+       fi
+       sleep 1
+     done
+     if [ -n "$(pidof minisatip)" ]; then
+       eerror  "$DESC does not terminate normally - killing $DESC"
+       killall -v -KILL minisatip
+       sleep 1
+       [ -f /var/run/minisatip.pid ] && rm -f /var/run/minisatip.pid
+     fi
+   fi
+   eend 0
+}
