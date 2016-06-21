@@ -35,6 +35,6 @@ src_install() {
 }
 
 pkg_postinstall() {
-	einfo "Please merge any 'TV Movie'-specific channelmap entries you need,"
+	einfo "Please merge any 'TV Spielfilm'-specific channelmap entries you need,"
 	einfo "to '/etc/epgd/channelmap.conf' manually"
 }

@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils git-2
 
-DESCRIPTION="TV Spielfilm loader plugin for EPGd"
+DESCRIPTION="TV Movie loader plugin for EPGd"
 HOMEPAGE="https://github.com/3PO/epgd-plugin-tvm"
 
 EGIT_REPO_URI="https://github.com/3PO/epgd-plugin-tvm"
