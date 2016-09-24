@@ -35,6 +35,7 @@ src_prepare() {
 	if ! use dvbcsa ; then
 	  sed -i "${S}"/Makefile -e "s/DVBCSA?=yes/DVBCSA?=no/" || die
 	fi
+	sed -i "${S}"/adapter.h -e "s/#define MAX_ADAPTERS 16/#define MAX_ADAPTERS 32/" || die
       	append-flags -lpthread -fPIC -lrt
 #	filter-flags -O2 -pipe
 }
