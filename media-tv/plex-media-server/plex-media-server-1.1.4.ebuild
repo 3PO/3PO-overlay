@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -8,8 +8,8 @@ inherit eutils user rpm
 MAGIC1="2757"
 MAGIC2="24ffd60"
 URI="https://downloads.plex.tv/plex-media-server"
-DESCRIPTION="Plex Media Server is a free media library that is intended for use with a plex client available for OS X, iOS and Android systems. It is a standalone product which can be used in conjunction with every program, that knows the API. For managing the library a web based interface is provided."
-HOMEPAGE="http://www.plex.tv/"
+DESCRIPTION="Plex Media Server is an organizer for your media and provides streaming over the web and to devices"
+HOMEPAGE="http://plex.tv/"
 KEYWORDS="~amd64"
 
 SRC_URI="${URI}/${PV}.${MAGIC1}-${MAGIC2}/plexmediaserver-${PV}.${MAGIC1}-${MAGIC2}.x86_64.rpm"

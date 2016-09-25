@@ -1,6 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -23,23 +23,20 @@ DEPEND="
 
 RDEPEND="${DEPEND}"
 
-
 src_unpack() {
 
 	git-2_src_unpack
 }
 
-
 src_prepare() {
- 
+
 	if ! use dvbcsa ; then
 	  sed -i "${S}"/Makefile -e "s/DVBCSA?=yes/DVBCSA?=no/" || die
 	fi
 	sed -i "${S}"/adapter.h -e "s/#define MAX_ADAPTERS 16/#define MAX_ADAPTERS 32/" || die
-      	append-flags -lpthread -fPIC -lrt
+	append-flags -lpthread -fPIC -lrt
 #	filter-flags -O2 -pipe
 }
-
 
 src_install() {
 
@@ -49,4 +46,3 @@ src_install() {
 	newinitd "${FILESDIR}"/minisatip.initd minisatip || die
 	newconfd "${FILESDIR}"/minisatip.confd minisatip || die
 }
-
