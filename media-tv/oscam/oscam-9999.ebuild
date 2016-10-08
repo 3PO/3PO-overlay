@@ -38,11 +38,6 @@ DEPEND="dev-util/cmake
 
 RDEPEND="${DEPEND}"
 
-if use debug ; then 
-  RESTRICT="strip" 
-  append-flags "-O0 -ggdb" 
-fi 
-
 src_unpack() {
 
        subversion_src_unpack
@@ -52,6 +47,12 @@ src_unpack() {
             EGIT_SOURCEDIR="${S}/oscam-emu"
             git-2_src_unpack
        fi
+
+       if use debug ; then 
+            RESTRICT="strip" 
+            append-flags "-O0 -ggdb" 
+       fi 
+
 }
 
 src_prepare () {
