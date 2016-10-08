@@ -47,12 +47,6 @@ src_unpack() {
             EGIT_SOURCEDIR="${S}/oscam-emu"
             git-2_src_unpack
        fi
-
-       if use debug ; then 
-            RESTRICT="strip" 
-            append-flags "-O0 -ggdb" 
-       fi 
-
 }
 
 src_prepare () {
@@ -116,6 +110,11 @@ src_configure() {
 }
 
 src_install() {
+
+        if use debug ; then 
+          RESTRICT="strip" 
+          append-flags "-O0 -ggdb" 
+        fi 
 
 	cmake-utils_src_install
 
