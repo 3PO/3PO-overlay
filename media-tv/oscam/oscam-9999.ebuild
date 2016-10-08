@@ -19,7 +19,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS=""
 
-IUSE_ADDONS="+webif +touch +dvbapi +irdeto-guessing +anticacading -ssl +monitor +loadbalancing +chacheex -led -lcd -ipv6 +clockfix -emu" 
+IUSE_ADDONS="+webif +touch +dvbapi +irdeto-guessing +anticacading -ssl +debug +monitor +loadbalancing +chacheex -led -lcd -ipv6 +clockfix -emu" 
 IUSE_PROTOCOL="-camd33 +camd35_udp +camd35_tcp +newcamd +cccam +cccshare +gbox +radegast +serial +constantcw +pandora -ghttp"
 IUSE_READER="+nagra +irdeto +conax +cryptoworks +seca +viaccess +videoguard +dre +tongfang +blucrypt +griffin +dgcrypt"
 IUSE_CARDREADER="+phoenix +internal +sc8in1 +mp35 +smartreader +dbox2 +stapi pcsc"
