@@ -19,7 +19,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS=""
 
-IUSE_ADDONS="+webif +touch +dvbapi +irdeto-guessing +anticacading -ssl +debug +monitor +loadbalancing +chacheex -led -lcd -ipv6 +clockfix -emu" 
+IUSE_ADDONS="+webif +touch +dvbapi +irdeto-guessing +anticacading -ssl +monitor +loadbalancing +chacheex -led -lcd -ipv6 +clockfix -emu" 
 IUSE_PROTOCOL="-camd33 +camd35_udp +camd35_tcp +newcamd +cccam +cccshare +gbox +radegast +serial +constantcw +pandora -ghttp"
 IUSE_READER="+nagra +irdeto +conax +cryptoworks +seca +viaccess +videoguard +dre +tongfang +blucrypt +griffin +dgcrypt"
 IUSE_CARDREADER="+phoenix +internal +sc8in1 +mp35 +smartreader +dbox2 +stapi pcsc"
@@ -30,7 +30,6 @@ IUSE="${IUSE_ADDONS} ${IUSE_PROTOCOL} ${IUSE_READER} ${IUSE_CARDREADER} cardread
 DEPEND="dev-util/cmake
        dev-vcs/subversion
        dev-vcs/git
-       debug? ( sys-devel/gdb )
 	ssl? ( dev-libs/openssl )
 	usb? ( virtual/libusb:1 dev-libs/libusb-compat )
        pcsc? ( sys-apps/pcsc-lite )
@@ -47,11 +46,6 @@ src_unpack() {
             EGIT_SOURCEDIR="${S}/oscam-emu"
             git-2_src_unpack
        fi
-
-       if use debug ; then 
-            RESTRICT="strip" 
-            append-flags "-O0 -ggdb" 
-       fi 
 }
 
 src_prepare () {
