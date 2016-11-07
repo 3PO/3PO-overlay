@@ -31,7 +31,7 @@ src_unpack() {
 src_prepare() {
 
 	if ! use dvbcsa ; then
-	  sed -i "${S}"/Makefile -e "s/DVBCSA?=yes/DVBCSA?=no/" || die
+	  econf --disable-dvbcsa || die
 	fi
 	sed -i "${S}"/adapter.h -e "s/#define MAX_ADAPTERS 16/#define MAX_ADAPTERS 32/" || die
 	append-flags -lpthread -fPIC -lrt
