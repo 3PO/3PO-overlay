@@ -30,12 +30,15 @@ src_unpack() {
 
 src_prepare() {
 
+	sed -i "${S}"/adapter.h -e "s/#define MAX_ADAPTERS 16/#define MAX_ADAPTERS 32/" || die
+	append-flags -lpthread -fPIC -lrt
+}
+
+src_configure() {
+
 	if ! use dvbcsa ; then
 	  econf --disable-dvbcsa || die
 	fi
-	sed -i "${S}"/adapter.h -e "s/#define MAX_ADAPTERS 16/#define MAX_ADAPTERS 32/" || die
-	append-flags -lpthread -fPIC -lrt
-#	filter-flags -O2 -pipe
 }
 
 src_install() {
