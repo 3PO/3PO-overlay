@@ -38,6 +38,8 @@ src_configure() {
 
 	if ! use dvbcsa ; then
 	  econf --disable-dvbcsa || die
+	else
+	  econf || die
 	fi
 }
 
