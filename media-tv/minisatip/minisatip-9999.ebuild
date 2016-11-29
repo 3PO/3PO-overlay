@@ -10,8 +10,8 @@ DESCRIPTION="minisatip is an SATIP server for linux using local DVB-S2, DVB-S or
 HOMEPAGE="https://github.com/catalinii/minisatip"
 
 # EGIT_REPO_URI="https://github.com/catalinii/minisatip"
-: ${EGIT_REPO_URI:=${EPGD_GIT_REPO_URI:-git://github.com/catalinii/minisatip}} 
-: ${EGIT_BRANCH:=${EPGD_GIT_BRANCH:-master}} 
+: ${EGIT_REPO_URI:=${MINISATIP_GIT_REPO_URI:=https://github.com/catalinii/minisatip}} 
+: ${EGIT_BRANCH:=${MINISATIP_GIT_BRANCH:-master}} 
 
 LICENSE="GPL-2"
 SLOT="0"
