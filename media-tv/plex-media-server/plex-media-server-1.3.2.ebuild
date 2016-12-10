@@ -18,7 +18,8 @@ SLOT="0"
 LICENSE="PMS-License"
 IUSE=""
 RDEPEND="net-dns/avahi
-         app-arch/rpm"
+         app-arch/rpm
+	 dev-db/soci"
 
 DEPEND="${RDEPEND}"
 
