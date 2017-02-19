@@ -22,7 +22,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS=""
 
-IUSE=" tvm tvsp -debug"
+IUSE=" tvm tvsp -debug -systemd"
 
 DEPEND="dev-vcs/git
         app-arch/libarchive
@@ -60,9 +60,14 @@ src_prepare() {
 
 	sed -i Make.config -e "s/\/local//"
 
-        sed -i Make.config -e "s/INIT_SYSTEM  = upstart/INIT_SYSTEM  = none/"
-
 	sed -i http/Makefile -e "s/^LESS_Compiler.*/LESS_Compiler=\/usr\/bin\/jsscript-1.6/" || die
+
+        if use systemd; then
+	  einfo "Using init system \"systemd\"
+	else
+	  einfo "Using init systemd \"none\"
+	  sed -i Make.config -e "s/INIT_SYSTEM  = systemd/INIT_SYSTEM  = none/"
+	fi
 
 	if use debug; then
 	  sed -i Make.config -e "s/# DEBUG/DEBUG/"
