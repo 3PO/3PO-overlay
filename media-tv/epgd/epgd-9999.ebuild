@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_DEPEND="2"
 
-inherit eutils git-2 python
+inherit eutils git-2 python-utils-r1
 
 DESCRIPTION="a EPG daemon which fetch the EPG and additional data from various sources"
 HOMEPAGE="http://projects.vdr-developer.org/projects/vdr-epg-daemon"
