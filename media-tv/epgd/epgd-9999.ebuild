@@ -65,6 +65,7 @@ src_prepare() {
 		einfo "Using init system 'systemd'"
 	else
 		einfo "Using init system 'none'"
+
 		sed -i Make.config -e "s/INIT_SYSTEM  = systemd/INIT_SYSTEM  = none/"
 	fi
 
