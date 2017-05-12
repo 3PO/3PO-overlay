@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/catalinii/minisatip"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="linuxdvb -dvbca -dvbaes -dvbcsa -dvbapi satipc -static"
+IUSE="+linuxdvb -dvbca -dvbaes -dvbcsa -dvbapi +satipc -static"
 
 DEPEND="
 	dev-vcs/git
