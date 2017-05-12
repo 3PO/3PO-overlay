@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -16,11 +16,12 @@ HOMEPAGE="https://github.com/catalinii/minisatip"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="-dvbcsa"
+IUSE="linuxdvb -dvbca -dvbaes -dvbcsa -dvbapi satipc -static"
 
 DEPEND="
 	dev-vcs/git
 	dvbcsa? ( media-libs/libdvbcsa )
+	dvbaes? ( dev-libs/openssl )	
 "
 
 RDEPEND="${DEPEND}"
@@ -39,11 +40,47 @@ src_prepare() {
 
 src_configure() {
 
+	if ! use linuxdvb ; then
+	  econf --disable-linuxdvb || die
+	else
+	  econf || die
+	fi
+
+	if ! use dvbca ; then
+	  econf --disable-dvbca || die
+	else
+	  econf || die
+	fi
+	
+	if ! use dvbaes ; then
+	  econf --disable-dvbaes || die
+	else
+	  econf || die
+	fi
+	
 	if ! use dvbcsa ; then
 	  econf --disable-dvbcsa || die
 	else
 	  econf || die
 	fi
+	
+	if ! use dvbapi ; then
+	  econf --disable-dvbapi || die
+	else
+	  econf || die
+	fi
+	
+	if ! use satipc ; then
+	  econf --disable-satipc || die
+	else
+	  econf || die
+	fi
+	
+	if use static ; then
+	  econf --enable-static || die
+	else
+	  econf || die
+	fi								
 }
 
 src_install() {
