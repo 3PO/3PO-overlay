@@ -40,48 +40,20 @@ src_prepare() {
 
 src_configure() {
 
-	if ! use linuxdvb ; then
-	  econf --disable-linuxdvb || die
-	else
-	  econf || die
-	fi
-
-	if ! use dvbca ; then
-	  econf --disable-dvbca || die
-	else
-	  econf || die
-	fi
-	
-	if ! use dvbaes ; then
-	  econf --disable-dvbaes || die
-	else
-	  econf || die
-	fi
-	
-	if ! use dvbcsa ; then
-	  econf --disable-dvbcsa || die
-	else
-	  econf || die
-	fi
-	
-	if ! use dvbapi ; then
-	  econf --disable-dvbapi || die
-	else
-	  econf || die
-	fi
-	
-	if ! use satipc ; then
-	  econf --disable-satipc || die
-	else
-	  econf || die
-	fi
-	
-	if use static ; then
-	  econf --enable-static || die
-	else
-	  econf || die
-	fi								
+    econf \
+        $(use_enable linuxdvb) \
+        $(use_enable dvbca) \
+        $(use_enable dvbaes) \
+        $(use_enable dvbcsa) \
+        $(use_enable dvbapi) \
+        $(use_enable satipc) \
+        $(use_enable static)								
 }
+
+
+
+
+
 
 src_install() {
 
