@@ -47,7 +47,7 @@ src_configure() {
         $(use_enable dvbcsa) \
         $(use_enable dvbapi) \
         $(use_enable satipc) \
-        $(use_enable static)								
+        $(use_enable !static)								
 }
 
 
