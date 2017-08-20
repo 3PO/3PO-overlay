@@ -29,7 +29,7 @@ DEPEND="dev-vcs/git
 	net-misc/curl
 	dev-libs/libxslt
 	dev-libs/libxml2
-	>=dev-db/mysql-5.1.70
+	>=virtual/mysql-5.1.70
 	dev-libs/libzip
 	dev-libs/jansson
 	media-libs/imlib2
