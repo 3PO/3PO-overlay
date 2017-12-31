@@ -5,8 +5,8 @@
 EAPI="5"
 
 inherit eutils user rpm
-MAGIC1="4633"
-MAGIC2="70f9c31ed"
+MAGIC1="4666"
+MAGIC2="fc63598ba"
 URI="https://downloads.plex.tv/plex-media-server"
 DESCRIPTION="Plex Media Server is an organizer for your media and provides streaming over the web and to devices"
 HOMEPAGE="http://plex.tv/"
