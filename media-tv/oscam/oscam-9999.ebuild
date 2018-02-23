@@ -49,7 +49,7 @@ src_unpack() {
 }
 
 src_prepare () {
-
+	cmake-utils_src_prepare
 	subversion_src_prepare  
   	sed -i -e 's:\(CMAKE_EXE_LINKER_FLAGS\) "-s":\1 "":' CMakeLists.txt || die
 	sed -i 's|\(svnversion -n \)\.|\1/usr/portage/distfiles/svn-src/oscam/trunk|' config.sh || die
@@ -59,7 +59,7 @@ src_prepare () {
 
 src_configure() {
 
-	local mycmakeargs="
+	local mycmakeargs=(
 		-DCS_CONFDIR=/etc/oscam
 		-DCMAKE_VERBOSE_MAKEFILE=ON
 		-INCLUDED=Yes 
@@ -73,7 +73,7 @@ src_configure() {
 		$(cmake-utils_use ssl WITH_SSL)
 		$(cmake-utils_use loadbalancing WITH_LB)
 		$(cmake-utils_use chacheex CS_CACHEEX)
-		$(cmake-utils_use lcd LEDSUPPORT)
+		$(cmake-utils_use led LEDSUPPORT)
 		$(cmake-utils_use lcd LCDSUPPORT)
 		$(cmake-utils_use ipv6 IPV6SUPPORT)
 		$(cmake-utils_use clockfix CLOCKFIX)
@@ -103,7 +103,8 @@ src_configure() {
 		$(cmake-utils_use blucrypt READER_BULCRYPT)
 		$(cmake-utils_use griffin READER_GRIFFIN)
 		$(cmake-utils_use dgcrypt READER_DGCRYPT)
-		$(cmake-utils_use pcsc WITH_PCSC)"
+		$(cmake-utils_use pcsc WITH_PCSC)
+	)
 
        cmake-utils_src_configure
 }
