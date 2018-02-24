@@ -26,6 +26,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -i Makefile -e 's/^EPGD_SRC.*/EPGD_SRC=\/usr\/include\/epgd/'
+	epatch_user
 }
 
 src_install() {
