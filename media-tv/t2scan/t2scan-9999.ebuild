@@ -18,7 +18,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=">=virtual/linuxtv-dvb-headers-5.3"
+DEPEND=">=virtual/linuxtv-dvb-headers-5.3
+	>=sys-devel/automake-1.16.1-r1"
 RDEPEND=""
 
 src_install() {
