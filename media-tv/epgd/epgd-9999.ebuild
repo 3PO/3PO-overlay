@@ -2,16 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils git-2 python-any-r1
+inherit eutils git-r3 python-any-r1
 
 DESCRIPTION="a EPG daemon which fetch the EPG and additional data from various sources"
 HOMEPAGE="http://projects.vdr-developer.org/projects/vdr-epg-daemon"
 # EGIT_REPO_URI="git://projects.vdr-developer.org/vdr-epg-daemon.git"
-: ${EGIT_REPO_URI:=${EPGD_GIT_REPO_URI:-git://projects.vdr-developer.org/vdr-epg-daemon.git}}
+: ${EGIT_REPO_URI:=${EPGD_GIT_REPO_URI:-https://projects.vdr-developer.org/git/vdr-epg-daemon.git/}}
 : ${EGIT_BRANCH:=${EPGD_GIT_BRANCH:-master}}
 
 SRC_URI=""
@@ -48,7 +48,7 @@ pkg_setup() {
 
 src_unpack() {
 
-	git-2_src_unpack || default
+	git-r3_src_unpack || default
 
 }
 
@@ -72,10 +72,7 @@ src_prepare() {
 		sed -i Make.config -e "s/# DEBUG/DEBUG/"
 	fi
 
-	EPATCH_OPTS="-p1" 
-	for LOCALPATCH in ${EPGD_LOCAL_PATCHES_DIR}/*.{diff,patch}; do
-		test -f "${LOCALPATCH}" && epatch "${LOCALPATCH}"
-	done
+	eapply_user
 
 }
 

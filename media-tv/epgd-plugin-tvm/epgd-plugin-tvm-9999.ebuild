@@ -1,16 +1,16 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
-inherit eutils git-2
+inherit eutils git-r3
 
 DESCRIPTION="TV Movie loader plugin for EPGd"
 HOMEPAGE="https://github.com/3PO/epgd-plugin-tvm"
 
 # EGIT_REPO_URI="https://github.com/3PO/epgd-plugin-tvm"
-: ${EGIT_REPO_URI:=${EPGD_PLUGIN_TVM_GIT_REPO_URI:-git://github.com/3PO/epgd-plugin-tvm.git}}
+: ${EGIT_REPO_URI:=${EPGD_PLUGIN_TVM_GIT_REPO_URI:-https://github.com/3PO/epgd-plugin-tvm}}
 : ${EGIT_BRANCH:=${EPGD_PLUGIN_TVM_GIT_BRANCH:-master}}
 
 SRC_URI=""
@@ -25,8 +25,9 @@ DEPEND="media-tv/epgd"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+
 	sed -i Makefile -e 's/^EPGD_SRC.*/EPGD_SRC=\/usr\/include\/epgd/'
-	epatch_user
+	eapply_user
 }
 
 src_install() {
