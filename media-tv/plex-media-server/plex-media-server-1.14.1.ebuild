@@ -23,6 +23,8 @@ RDEPEND="net-dns/avahi
 
 DEPEND="${RDEPEND}"
 
+QA_PRESTRIPPED="usr/lib/plexmediaserver/*.*"
+
 pkg_setup() {
 	enewgroup plex
 	enewuser plex -1 /bin/bash /var/lib/plexmediaserver "plex" --system
@@ -40,7 +42,7 @@ src_install() {
 
         cd ${S}
 	dodir /etc/plex || die
-	dodir /var/log/pms || die
+	keepdir /var/log/pms || die
 	dodir /usr/lib/plexmediaserver || die
 	fperms 0755 /usr/lib/plexmediaserver || die
 	cp -R "${S}/" "${D}"/usr/lib/ || die "Install failed!"
@@ -48,7 +50,7 @@ src_install() {
 	newinitd "${FILESDIR}"/plex-media-server_initd plex-media-server || die
         insinto /etc/plex || die
         doins "${FILESDIR}"/plexmediaserver.conf || die
-	dodir /var/lib/plexmediaserver
+	keepdir /var/lib/plexmediaserver
 	chown plex:plex "${D}"var/lib/plexmediaserver || die
 	dodir /var/log/pms
 	chown plex:plex "${D}"var/log/pms || die
