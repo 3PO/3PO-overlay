@@ -52,7 +52,6 @@ src_install() {
         doins "${FILESDIR}"/plexmediaserver.conf || die
 	keepdir /var/lib/plexmediaserver
 	chown plex:plex "${D}"var/lib/plexmediaserver || die
-	dodir /var/log/pms
 	chown plex:plex "${D}"var/log/pms || die
 
 
