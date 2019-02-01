@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/catalinii/minisatip"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm x86"
-IUSE="+linuxdvb -dvbca -dvbaes -dvbcsa -dvbapi +satipc -static"
+IUSE="+linuxdvb -dvbca -dvbaes -dvbcsa -dvbapi +satipc -static -ddci"
 
 DEPEND="
 	dev-vcs/git
@@ -25,6 +25,8 @@ DEPEND="
 "
 
 RDEPEND="${DEPEND}"
+
+REQUIRED_USE="ddci? ( dvbca )"
 
 src_unpack() {
 
@@ -35,7 +37,6 @@ src_prepare() {
 
 	eapply_user
 	append-flags -lpthread -fPIC -lrt
-
 }
 
 src_configure() {
@@ -47,7 +48,11 @@ src_configure() {
         $(use_enable dvbcsa) \
         $(use_enable dvbapi) \
         $(use_enable satipc) \
-        $(use_enable static)								
+        $(use_enable static) \	
+	if use ddci ; then
+	  sed -i "${WORKDIR}"/"${P}"/src/Makefile -e "s/DDCI=0/DDCI=1/" || die
+	fi
+						
 }
 
 
