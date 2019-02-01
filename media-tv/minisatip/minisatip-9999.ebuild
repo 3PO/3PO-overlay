@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
-inherit eutils autotools git-2 flag-o-matic
+inherit eutils autotools git-r3 flag-o-matic
 
 DESCRIPTION="minisatip is an SATIP server for linux using local DVB-S2, DVB-S or DVB-T cards"
 HOMEPAGE="https://github.com/catalinii/minisatip"
@@ -28,13 +28,14 @@ RDEPEND="${DEPEND}"
 
 src_unpack() {
 
-	git-2_src_unpack
+	git-r3_src_unpack
 }
 
 src_prepare() {
 
+	eapply_user
 	append-flags -lpthread -fPIC -lrt
-	epatch_user
+
 }
 
 src_configure() {
