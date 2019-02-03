@@ -24,7 +24,7 @@ IUSE_PROTOCOL="-camd33 +camd35_udp +camd35_tcp +newcamd +cccam +cccshare +gbox +
 IUSE_READER="+nagra +irdeto +conax +cryptoworks +seca +viaccess +videoguard +dre +tongfang +blucrypt +griffin +dgcrypt"
 IUSE_CARDREADER="+phoenix +internal +sc8in1 +mp35 +smartreader +stapi pcsc"
 
-IUSE="${IUSE_ADDONS} ${IUSE_PROTOCOL} ${IUSE_READER} ${IUSE_CARDREADER} cardreader +usb +doc"
+IUSE="${IUSE_ADDONS} ${IUSE_PROTOCOL} ${IUSE_READER} ${IUSE_CARDREADER} cardreader +usb"
 
 
 DEPEND="dev-util/cmake
@@ -119,7 +119,7 @@ src_install() {
 	fi
 
 	dodir /etc/oscam || die
-	dodir /var/log/oscam || die
+	keepdir /var/log/oscam || die
 	fperms 0755 /etc/oscam || die
 	newinitd "${FILESDIR}"/oscam.initd oscam || die
 	newconfd "${FILESDIR}"/oscam.confd oscam || die
@@ -127,11 +127,6 @@ src_install() {
 	doins "${WORKDIR}"/"${P}"/Distribution/doc/example/* || die
 	exeinto /usr/bin || die
 	doexe "${FILESDIR}"/watchdog/oscam_watchdog.sh || die
-
-	if use doc; then
-	  docinto examples
-	  dodoc Distribution/doc/example/oscam.* || die
-	fi
 }
 
 pkg_postinst() {
