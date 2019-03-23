@@ -20,7 +20,8 @@ LICENSE="PMS-License"
 IUSE=""
 RDEPEND="net-dns/avahi
          app-arch/rpm
-	 dev-db/soci"
+	 dev-db/soci
+	 dev-util/patchelf"
 
 DEPEND="${RDEPEND}"
 
@@ -38,8 +39,18 @@ src_unpack () {
         rpm_src_unpack ${A}
 }
 
+src_prepare() {
+	default
+	# scanelf: rpath_security_checks(): Security problem with relative DT_RPATH '.'
+	for file in "${S}"/Resources/Python/lib/python2.7/{site-packages/lxml/etree.so,site-packages/lxml/objectify.so,site-packages/simplejson/_speedups.so,lib-dynload/_bisect.so}
+	do
+	  patchelf --set-rpath '$ORIGIN' $file || die
+	done
+}
 
 src_install() {
+
+	# patchelf --set-rpath '$ORIGIN' "${S}"/Resources/Python/lib/python2.7/site-packages/lxml/etree.so || die
 
         cd ${S}
 	dodir /etc/plex || die
