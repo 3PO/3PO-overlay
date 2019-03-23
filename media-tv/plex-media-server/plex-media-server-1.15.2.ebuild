@@ -35,7 +35,6 @@ pkg_setup() {
 
 
 src_unpack () {
-
         rpm_src_unpack ${A}
 }
 
@@ -49,9 +48,6 @@ src_prepare() {
 }
 
 src_install() {
-
-	# patchelf --set-rpath '$ORIGIN' "${S}"/Resources/Python/lib/python2.7/site-packages/lxml/etree.so || die
-
         cd ${S}
 	dodir /etc/plex || die
 	keepdir /var/log/pms || die
@@ -65,8 +61,6 @@ src_install() {
 	keepdir /var/lib/plexmediaserver
 	chown plex:plex "${D}"var/lib/plexmediaserver || die
 	chown plex:plex "${D}"var/log/pms || die
-
-
 }
 
 pkg_postinst() {
