@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
-inherit flag-o-matic eutils subversion cmake-utils git-2
+inherit flag-o-matic eutils subversion cmake-utils git-r3
 
 DESCRIPTION="OSCam is an Open Source Conditional Access Module software, based on the very good MpCS version 0.9d"
 HOMEPAGE="http://streamboard.gmc.to:8001/wiki/"
