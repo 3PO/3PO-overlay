@@ -44,7 +44,7 @@ src_unpack() {
        if use emu; then
             mkdir "${S}/oscam-emu"
             EGIT_SOURCEDIR="${S}/oscam-emu"
-            git-2_src_unpack
+            git-3_src_unpack
        fi
 }
 

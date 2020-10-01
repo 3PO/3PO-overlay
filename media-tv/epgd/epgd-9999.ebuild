@@ -33,7 +33,7 @@ DEPEND="dev-vcs/git
 	dev-libs/libzip
 	dev-libs/jansson
 	media-libs/imlib2
-	net-libs/libmicrohttpd[messages,epoll]
+	>=net-libs/libmicrohttpd-0.9.68[epoll]
 	dev-java/rhino"
 
 RDEPEND="${DEPEND}"
